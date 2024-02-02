@@ -88,3 +88,14 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+.DS_Store
+
+# Xcode
+xcuserdata
+*.xcuserstate
+
+# Swift Package Manager
+Package.pins
+Package.resolved
+.swiftpm

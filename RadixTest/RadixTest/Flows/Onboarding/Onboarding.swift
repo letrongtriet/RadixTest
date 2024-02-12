@@ -19,17 +19,13 @@ struct Onboarding: Reducer {
     struct Path: Reducer {
         enum State: Equatable {
             case yearOfBirth(YearOfBirth.State)
-            case firstname(NameInput.State)
-            case lastname(NameInput.State)
-            case nameCompletion(NameCompletion.State)
+            case namingMain(NamingMain.State)
             case onboardingCompletion(OnboardingCompletion.State)
         }
 
         enum Action: Equatable {
             case yearOfBirth(YearOfBirth.Action)
-            case firstname(NameInput.Action)
-            case lastname(NameInput.Action)
-            case nameCompletion(NameCompletion.Action)
+            case namingMain(NamingMain.Action)
             case onboardingCompletion(OnboardingCompletion.Action)
         }
 
@@ -37,14 +33,8 @@ struct Onboarding: Reducer {
             Scope(state: /State.yearOfBirth, action: /Action.yearOfBirth) {
                 YearOfBirth()
             }
-            Scope(state: /State.firstname, action: /Action.firstname) {
-                NameInput()
-            }
-            Scope(state: /State.lastname, action: /Action.lastname) {
-                NameInput()
-            }
-            Scope(state: /State.nameCompletion, action: /Action.nameCompletion) {
-                NameCompletion()
+            Scope(state: /State.namingMain, action: /Action.namingMain) {
+                NamingMain()
             }
             Scope(state: /State.onboardingCompletion, action: /Action.onboardingCompletion) {
                 OnboardingCompletion()
@@ -60,8 +50,6 @@ struct Onboarding: Reducer {
         var welcomeText = "Welcome to Radix"
 
         var yearOfBirth: Int = -1
-        var firstname: String?
-        var lastname: String?
 
         var path = StackState<Path.State>()
     }
@@ -97,11 +85,8 @@ struct Onboarding: Reducer {
                     state.yearOfBirth = yearOfBirth
 
                     if yearOfBirth.age >= 18 {
-                        let firstnameState: NameInput.State = .init(
-                            externalState: .init(),
-                            internalState: .init(inputMode: .firtname)
-                        )
-                        let pathState: Path.State = .firstname(firstnameState)
+                        let namingMainSate: NamingMain.State = .init(firstname: "", lastname: "")
+                        let pathState: Path.State = .namingMain(namingMainSate)
                         state.path.append(
                             pathState
                         )
@@ -123,42 +108,11 @@ struct Onboarding: Reducer {
 
                     return .none
 
-                case let .element(id: _, action: .firstname(.delegate(.inputConfimed(firstname)))):
-                    state.firstname = firstname
-                    let lastnameState: NameInput.State = .init(
-                        externalState: .init(),
-                        internalState: .init(inputMode: .lastname)
-                    )
-                    let pathState: Path.State = .lastname(lastnameState)
-                    state.path.append(
-                        pathState
-                    )
-                    return .none
-
-                case let .element(id: _, action: .lastname(.delegate(.inputConfimed(lastname)))):
-                    state.lastname = lastname
-
-                    if let firstname = state.firstname, let lastname = state.lastname {
-                        let nameCompletionState: NameCompletion.State = .init(
-                            externalState: .init(),
-                            internalState: .init(
-                                lastname: firstname,
-                                firstname: lastname
-                            )
-                        )
-                        let pathState: Path.State = .nameCompletion(nameCompletionState)
-                        state.path.append(
-                            pathState
-                        )
-                    }
-
-                    return .none
-
-                case .element(id: _, action: .nameCompletion(.delegate(.onContinue))):
+                case let .element(id: _, action: .namingMain(.delegate(.namingCompleted(firstname, lastname)))):
                     let userDetails = UserDetails(
                         yearOfBirth: state.yearOfBirth,
-                        firstname: state.firstname,
-                        lastname: state.lastname
+                        firstname: firstname,
+                        lastname: lastname
                     )
                     let onboardingCompletionState: OnboardingCompletion.State = .init(
                         externalState: .init(userDetails: userDetails),

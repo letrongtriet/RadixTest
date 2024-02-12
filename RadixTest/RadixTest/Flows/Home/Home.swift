@@ -20,26 +20,16 @@ struct Home: Reducer {
 
     struct Path: Reducer {
         enum State: Equatable {
-            case firstname(NameInput.State)
-            case lastname(NameInput.State)
-            case nameCompletion(NameCompletion.State)
+            case namingMain(NamingMain.State)
         }
 
         enum Action: Equatable {
-            case firstname(NameInput.Action)
-            case lastname(NameInput.Action)
-            case nameCompletion(NameCompletion.Action)
+            case namingMain(NamingMain.Action)
         }
 
         var body: some Reducer<State, Action> {
-            Scope(state: /State.firstname, action: /Action.firstname) {
-                NameInput()
-            }
-            Scope(state: /State.lastname, action: /Action.lastname) {
-                NameInput()
-            }
-            Scope(state: /State.nameCompletion, action: /Action.nameCompletion) {
-                NameCompletion()
+            Scope(state: /State.namingMain, action: /Action.namingMain) {
+                NamingMain()
             }
         }
     }
@@ -50,11 +40,7 @@ struct Home: Reducer {
 
     struct Internal: Equatable {
         var path = StackState<Path.State>()
-
         var userDetails: UserDetails?
-
-        var tempFirstName: String?
-        var tempLastName: String?
     }
 
     enum Action: Equatable {
@@ -72,62 +58,23 @@ struct Home: Reducer {
                 return .none
 
             case .didSelectChangeName:
-                if let firstname = state.userDetails?.firstname {
-                    let firstnameState: NameInput.State = .init(
-                        externalState: .init(),
-                        internalState: .init(inputMode: .firtname, input: firstname)
-                    )
-                    let pathState: Path.State = .firstname(firstnameState)
+                if let firstname = state.userDetails?.firstname, let lastname = state.userDetails?.lastname {
+                    let namingMainSate: NamingMain.State = .init(firstname: firstname, lastname: lastname)
+                    let pathState: Path.State = .namingMain(namingMainSate)
                     state.path.append(
                         pathState
                     )
                 }
-
                 return .none
 
             case let .path(action):
                 switch action {
-                case let .element(id: _, action: .firstname(.delegate(.inputConfimed(firstname)))):
-                    state.tempFirstName = firstname
-                    
-                    if let lastname = state.userDetails?.lastname {
-                        let lastnameState: NameInput.State = .init(
-                            externalState: .init(),
-                            internalState: .init(inputMode: .lastname, input: lastname)
-                        )
-                        let pathState: Path.State = .lastname(lastnameState)
-                        state.path.append(
-                            pathState
-                        )
-                    }
-
-                    return .none
-
-                case let .element(id: _, action: .lastname(.delegate(.inputConfimed(lastname)))):
-                    state.tempLastName = lastname
-
-                    if let firstname = state.tempFirstName, let lastname = state.tempLastName {
-                        let nameCompletionState: NameCompletion.State = .init(
-                            externalState: .init(),
-                            internalState: .init(
-                                lastname: firstname,
-                                firstname: lastname
-                            )
-                        )
-                        let pathState: Path.State = .nameCompletion(nameCompletionState)
-                        state.path.append(
-                            pathState
-                        )
-                    }
-
-                    return .none
-
-                case .element(id: _, action: .nameCompletion(.delegate(.onContinue))):
+                case let .element(id: _, action: .namingMain(.delegate(.namingCompleted(firstname, lastname)))):
                     if let old = state.userDetails {
                         let userDetails = UserDetails(
                             yearOfBirth: old.yearOfBirth,
-                            firstname: state.tempFirstName,
-                            lastname: state.tempLastName
+                            firstname: firstname,
+                            lastname: lastname
                         )
                         userDetailsClient.storeUserDetails(userDetails)
                         state.userDetails = userDetails

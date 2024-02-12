@@ -50,6 +50,9 @@ struct NameInputView: View {
                 .disabled(viewStore.isContinueButtonDisabled)
             }
             .padding(.horizontal)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }

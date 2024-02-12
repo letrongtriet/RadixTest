@@ -50,23 +50,11 @@ struct OnboardingView: View {
                     action: Onboarding.Path.Action.yearOfBirth,
                     then: YearOfBirthView.init(store:)
                 )
-            case .firstname:
+            case .namingMain:
                 CaseLet(
-                    /Onboarding.Path.State.firstname,
-                    action: Onboarding.Path.Action.firstname,
-                    then: NameInputView.init(store:)
-                )
-            case .lastname:
-                CaseLet(
-                    /Onboarding.Path.State.lastname,
-                    action: Onboarding.Path.Action.lastname,
-                    then: NameInputView.init(store:)
-                )
-            case .nameCompletion:
-                CaseLet(
-                    /Onboarding.Path.State.nameCompletion,
-                    action: Onboarding.Path.Action.nameCompletion,
-                    then: NameCompletionView.init(store:)
+                    /Onboarding.Path.State.namingMain,
+                    action: Onboarding.Path.Action.namingMain,
+                    then: NamingMainView.init(store:)
                 )
             case .onboardingCompletion:
                 CaseLet(

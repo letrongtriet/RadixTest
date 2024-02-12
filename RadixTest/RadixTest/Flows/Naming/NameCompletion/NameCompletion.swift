@@ -10,20 +10,20 @@ import Foundation
 
 extension NameCompletion.State {
     init() {
-        internalState = .init(lastname: "First Name", firstname: "Last Name")
-        externalState = .init()
+        internalState = .init()
+        externalState = .init(lastname: "First Name", firstname: "Last Name")
     }
 }
 
 struct NameCompletion: Reducer {
     typealias State = TCAState<External, Internal>
 
-    struct External: Equatable {}
-
-    struct Internal: Equatable {
+    struct External: Equatable {
         var lastname: String
         var firstname: String
     }
+
+    struct Internal: Equatable {}
 
     enum Action: Equatable {
         case didSelectContinue

@@ -18,17 +18,18 @@ extension NameInput.State {
 struct NameInput: Reducer {
     typealias State = TCAState<External, Internal>
 
-    struct External: Equatable {}
+    struct External: Equatable {
+        var input: String = ""
+    }
 
     struct Internal: Equatable {
         var inputMode: NameInputMode
-
-        var input: String = ""
-
         var isContinueButtonDisabled = true
     }
 
     enum Action: Equatable {
+        case onAppear
+
         case inputChanged(String)
 
         case didSelectContinue
@@ -42,6 +43,10 @@ struct NameInput: Reducer {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                state.isContinueButtonDisabled = state.input.isEmpty
+                return .none
+
             case let .inputChanged(input):
                 state.input = input
                 state.isContinueButtonDisabled = input.isEmpty

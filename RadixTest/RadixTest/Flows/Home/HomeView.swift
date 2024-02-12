@@ -54,23 +54,11 @@ struct HomeView: View {
             }
         } destination: { (state: Home.Path.State) in
             switch state {
-            case .firstname:
+            case .namingMain:
                 CaseLet(
-                    /Home.Path.State.firstname,
-                    action: Home.Path.Action.firstname,
-                    then: NameInputView.init(store:)
-                )
-            case .lastname:
-                CaseLet(
-                    /Home.Path.State.lastname,
-                    action: Home.Path.Action.lastname,
-                    then: NameInputView.init(store:)
-                )
-            case .nameCompletion:
-                CaseLet(
-                    /Home.Path.State.nameCompletion,
-                    action: Home.Path.Action.nameCompletion,
-                    then: NameCompletionView.init(store:)
+                    /Home.Path.State.namingMain,
+                    action: Home.Path.Action.namingMain,
+                    then: NamingMainView.init(store:)
                 )
             }
         }

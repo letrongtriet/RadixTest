@@ -30,6 +30,8 @@
 		35698F5D2B6CCC2500DCE62F /* UserDetailsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35698F5C2B6CCC2500DCE62F /* UserDetailsClient.swift */; };
 		35698F5F2B6CD0BE00DCE62F /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35698F5E2B6CD0BE00DCE62F /* AppReducer.swift */; };
 		35698F612B6CD54C00DCE62F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35698F602B6CD54C00DCE62F /* AppView.swift */; };
+		35A0E2FD2B7A784200A49DE5 /* NamingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0E2FC2B7A784200A49DE5 /* NamingMain.swift */; };
+		35A0E2FF2B7A7C3100A49DE5 /* NamingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A0E2FE2B7A7C3100A49DE5 /* NamingMainView.swift */; };
 		35EB31042B6BD1DA00ADA29F /* RadixTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EB31032B6BD1DA00ADA29F /* RadixTestApp.swift */; };
 		35EB31082B6BD1DB00ADA29F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35EB31072B6BD1DB00ADA29F /* Assets.xcassets */; };
 		35EB310B2B6BD1DB00ADA29F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35EB310A2B6BD1DB00ADA29F /* Preview Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		35698F5C2B6CCC2500DCE62F /* UserDetailsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsClient.swift; sourceTree = "<group>"; };
 		35698F5E2B6CD0BE00DCE62F /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		35698F602B6CD54C00DCE62F /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		35A0E2FC2B7A784200A49DE5 /* NamingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingMain.swift; sourceTree = "<group>"; };
+		35A0E2FE2B7A7C3100A49DE5 /* NamingMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingMainView.swift; sourceTree = "<group>"; };
 		35EB31002B6BD1DA00ADA29F /* RadixTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadixTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EB31032B6BD1DA00ADA29F /* RadixTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadixTestApp.swift; sourceTree = "<group>"; };
 		35EB31072B6BD1DB00ADA29F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,10 +85,9 @@
 		350C1CE92B6BE0CD0031BE51 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				35A0E2FA2B7A77A700A49DE5 /* Naming */,
 				35698F562B6CC7EF00DCE62F /* Home */,
 				35698F482B6C3F5600DCE62F /* OnboardingCompletion */,
-				35698F3F2B6C3BCF00DCE62F /* NameCompletion */,
-				35698F3B2B6C399900DCE62F /* Input */,
 				350C1CF82B6C21290031BE51 /* App */,
 				350C1CF52B6C1F8F0031BE51 /* Onboarding */,
 				35698F362B6C36D600DCE62F /* YearOfBirth */,
@@ -199,6 +202,25 @@
 				35698F5C2B6CCC2500DCE62F /* UserDetailsClient.swift */,
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		35A0E2FA2B7A77A700A49DE5 /* Naming */ = {
+			isa = PBXGroup;
+			children = (
+				35A0E2FB2B7A781A00A49DE5 /* NamingMain */,
+				35698F3F2B6C3BCF00DCE62F /* NameCompletion */,
+				35698F3B2B6C399900DCE62F /* Input */,
+			);
+			path = Naming;
+			sourceTree = "<group>";
+		};
+		35A0E2FB2B7A781A00A49DE5 /* NamingMain */ = {
+			isa = PBXGroup;
+			children = (
+				35A0E2FC2B7A784200A49DE5 /* NamingMain.swift */,
+				35A0E2FE2B7A7C3100A49DE5 /* NamingMainView.swift */,
+			);
+			path = NamingMain;
 			sourceTree = "<group>";
 		};
 		35EB30F72B6BD1DA00ADA29F = {
@@ -322,6 +344,7 @@
 				35698F432B6C3C7E00DCE62F /* NameCompletionView.swift in Sources */,
 				35698F532B6CBF4F00DCE62F /* OnboardingView.swift in Sources */,
 				35698F412B6C3BF000DCE62F /* NameCompletion.swift in Sources */,
+				35A0E2FD2B7A784200A49DE5 /* NamingMain.swift in Sources */,
 				35698F452B6C3D8100DCE62F /* NameInput.swift in Sources */,
 				35698F512B6CBEB900DCE62F /* Onboarding.swift in Sources */,
 				35698F4A2B6C3F6900DCE62F /* OnboardingCompletion.swift in Sources */,
@@ -335,6 +358,7 @@
 				35698F5A2B6CCA6A00DCE62F /* HomeView.swift in Sources */,
 				350C1CF42B6C1EDE0031BE51 /* Welcome.swift in Sources */,
 				350C1CEF2B6BE1140031BE51 /* Splash.swift in Sources */,
+				35A0E2FF2B7A7C3100A49DE5 /* NamingMainView.swift in Sources */,
 				35698F612B6CD54C00DCE62F /* AppView.swift in Sources */,
 				35698F382B6C36F200DCE62F /* YearOfBirth.swift in Sources */,
 				350C1CF22B6BE1570031BE51 /* TCAState.swift in Sources */,
